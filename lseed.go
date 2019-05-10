@@ -20,7 +20,7 @@ import (
 	"github.com/btcsuite/btcutil"
 	"github.com/lightningnetwork/lnd/lnrpc"
 	"github.com/lightningnetwork/lnd/macaroons"
-	"github.com/roasbeef/lseed/seed"
+	"github.com/litecoinfinance/lseed/seed"
 )
 
 var (
