@@ -281,7 +281,7 @@ func (ds *DnsServer) parseRequest(name string, qtype uint16) (*DnsRequest, error
 		// We'll skip any empty conditionals, as well as any of the
 		// chain-specific sub-domains that this DNS server currently
 		// uses.
-		if len(cond) == 0 || cond == "ltc" || cond == "test" {
+		if len(cond) == 0 || cond == "ltfn" || cond == "test" {
 			continue
 		}
 

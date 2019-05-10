@@ -27,15 +27,15 @@ var (
 	listenAddr = flag.String("listen", "0.0.0.0:53", "Listen address for incoming requests.")
 
 	bitcoinNodeHost  = flag.String("btc-lnd-node", "", "The host:port of the backing btc lnd node")
-	litecoinNodeHost = flag.String("ltc-lnd-node", "", "The host:port of the backing ltc lnd node")
+	litecoinfinanceNodeHost = flag.String("ltfn-lnd-node", "", "The host:port of the backing ltfn lnd node")
 	testNodeHost     = flag.String("test-lnd-node", "", "The host:port of the backing btc testlnd node")
 
 	bitcoinTLSPath  = flag.String("btc-tls-path", "", "The path to the TLS cert for the btc lnd node")
-	litecoinTLSPath = flag.String("ltc-tls-path", "", "The path to the TLS cert for the ltc lnd node")
+	litecoinfinanceTLSPath = flag.String("ltfn-tls-path", "", "The path to the TLS cert for the ltfn lnd node")
 	testTLSPath     = flag.String("test-tls-path", "", "The path to the TLS cert for the test lnd node")
 
 	bitcoinMacPath  = flag.String("btc-mac-path", "", "The path to the macaroon for the btc lnd node")
-	litecoinMacPath = flag.String("ltc-mac-path", "", "The path to the macaroon for the ltc lnd node")
+	litecoinfinanceMacPath = flag.String("ltfn-mac-path", "", "The path to the macaroon for the ltfn lnd node")
 	testMacPath     = flag.String("test-mac-path", "", "The path to the macaroon for the test lnd node")
 
 	rootDomain = flag.String("root-domain", "nodes.lightning.directory", "Root DNS seed domain.")
@@ -194,20 +194,20 @@ func main() {
 
 	}
 
-	if *litecoinNodeHost != "" && *litecoinTLSPath != "" && *litecoinMacPath != "" {
-		log.Infof("Creating LTC chain view")
+	if *litecoinfinanceNodeHost != "" && *litecoinfinanceTLSPath != "" && *litecoinfinanceMacPath != "" {
+		log.Infof("Creating LTFN chain view")
 
 		lndNode, err := initLightningClient(
-			*litecoinNodeHost, *litecoinTLSPath, *litecoinMacPath,
+			*litecoinfinanceNodeHost, *litecoinfinanceTLSPath, *litecoinfinanceMacPath,
 		)
 		if err != nil {
-			panic(fmt.Sprintf("unable to connect to ltc lnd: %v", err))
+			panic(fmt.Sprintf("unable to connect to ltfn lnd: %v", err))
 		}
 
 		nView := seed.NewNetworkView("litecoinfinance")
 		go poller(lndNode, nView)
 
-		netViewMap["ltc."] = &seed.ChainView{
+		netViewMap["ltfn."] = &seed.ChainView{
 			NetView: nView,
 			Node:    lndNode,
 		}
