@@ -204,7 +204,7 @@ func main() {
 			panic(fmt.Sprintf("unable to connect to ltc lnd: %v", err))
 		}
 
-		nView := seed.NewNetworkView("litecoin")
+		nView := seed.NewNetworkView("litecoinfinance")
 		go poller(lndNode, nView)
 
 		netViewMap["ltc."] = &seed.ChainView{
