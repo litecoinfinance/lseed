@@ -1,3 +1,29 @@
+## How to Build
+
+We was use ubuntu 18.04 (x86-64)
+```
+wget https://dl.google.com/go/go1.12.4.linux-amd64.tar.gz
+sha256sum go1.12.4.linux-amd64.tar.gz | awk -F " " '{ print $1 }'
+```
+
+The final output of the command above should be
+`d7d1f1f88ddfe55840712dc1747f37a790cbcaa448f6c9cf51bbe10aa65442f5`. If it
+isn't, then the target REPO HAS BEEN MODIFIED, and you shouldn't install
+this version of Go. If it matches, then proceed to install Go:
+```
+sudo tar -C /usr/local -xzf go1.12.4.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin
+```
+
+```
+go get -d github.com/litecoinfinance/lseed
+cd go/src/github.com/litecoinfinance/lseed
+
+GO111MODULE=on GOOS=linux GOARCH=amd64 go build
+```
+
+Go to go/src/github.com/litecoinfinance/lseed folder and you find linux lseed bin.
+
 # lseed -- A Lightning DNS Seed
 
 Upon first joining the Lightning Network, a node must open a few connections to
@@ -61,3 +87,8 @@ Currently the seed will poll a local Lightning node periodically and update its
 local view accordingly.  In future I'd like to introduce a number of different
 information sources and add further tests, such as testing for reachability
 before returning nodes.
+
+
+	
+	
+
